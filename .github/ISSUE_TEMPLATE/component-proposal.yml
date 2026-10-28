@@ -1,0 +1,31 @@
+name: Component proposal
+description: Propose a new SwiftUI component before building it.
+labels: ["component proposal"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What does this component let app developers do that is hard today?
+    validations:
+      required: true
+  - type: textarea
+    id: api
+    attributes:
+      label: API sketch
+      description: How would someone use it? A few lines of Swift.
+      render: swift
+    validations:
+      required: true
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility
+      description: VoiceOver behavior, Dynamic Type, Reduce Motion alternatives.
+    validations:
+      required: true
+  - type: textarea
+    id: reference
+    attributes:
+      label: Reference
+      description: Screenshots, videos or links that show the intended look and motion.

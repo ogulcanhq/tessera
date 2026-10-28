@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcresult/
+build/
+
+# Node
+node_modules/
+*.tsbuildinfo
+
+# Website build output and generated registry data
+apps/web/.next/
+apps/web/out/
+apps/web/.generated/
+apps/web/public/previews/
+apps/web/next-env.d.ts
+.vercel/
+
+# Local env
+.env*.local
+
+# Local browser screenshots (Playwright)
+.playwright-mcp/

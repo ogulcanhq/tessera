@@ -1,0 +1,25 @@
+name: Bug report
+description: Something in a component, the Showcase or the website doesn't work.
+labels: ["bug"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Component or page
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: iOS version, device or simulator, Xcode version, install method (package or copied source).

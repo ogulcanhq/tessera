@@ -1,0 +1,37 @@
+import { PackageSnippet } from "@/components/install-section";
+
+## Requirements
+
+- iOS 17 or later
+- Xcode 16 or later (Swift 6)
+
+## Swift Package Manager
+
+In Xcode, choose **File › Add Package Dependencies**, paste the repository URL from the snippet below and add the **Tessera** library to your app target.
+
+In a `Package.swift`, add the dependency and the product:
+
+<PackageSnippet />
+
+Then import the module where you use a component:
+
+```swift
+import SwiftUI
+import Tessera
+```
+
+Tessera has no third-party dependencies, so adding it brings in nothing else.
+
+## Copy the source
+
+Every component page lists the files you need and shows their full source.
+
+1. Copy each file into your app target, or use **All files in one** to copy a single combined file.
+2. Files marked **Shared helper** are used by several components. Add each one only once.
+3. Remove nothing else. The copied code compiles as is, with only Apple frameworks.
+
+Copied code is yours to change. It won’t receive updates, so compare it with the component page when a new version comes out.
+
+## License
+
+Tessera is released under the MIT License. Keep the license header at the top of copied files.

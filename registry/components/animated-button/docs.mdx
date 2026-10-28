@@ -1,0 +1,113 @@
+`AnimatedButton` runs an asynchronous action and shows what's happening: it springs when pressed, shows a progress indicator while the action runs, then a checkmark or an xmark before returning to its label. Taps are ignored while an action runs, so a double tap never submits twice.
+
+## Basic usage
+
+Pass a title and an `async throws` closure. Returning means success; throwing means failure.
+
+```swift
+import SwiftUI
+import Tessera // Omit if you copied the source into your app.
+
+struct SettingsView: View {
+    var body: some View {
+        AnimatedButton("Save") {
+            try await saveChanges()
+        }
+        .buttonStyle(.borderedProminent)
+    }
+
+    func saveChanges() async throws { /* … */ }
+}
+```
+
+For anything other than plain text, use the `label` closure:
+
+```swift
+AnimatedButton {
+    try await submitForm()
+} label: {
+    Label("Continue", systemImage: "arrow.right")
+}
+```
+
+The label stays in the layout while the indicator shows, so the button keeps its size in every state.
+
+## Customization
+
+`AnimatedButton` has no styling API of its own. It works with the standard SwiftUI modifiers, and press feedback is added on top of whichever button style is in effect.
+
+```swift
+AnimatedButton("Place order") {
+    try await placeOrder()
+}
+.buttonStyle(.borderedProminent)   // or .bordered, .borderless, .plain, your own style
+.buttonBorderShape(.capsule)
+.controlSize(.large)
+.tint(.indigo)
+.font(.headline)
+```
+
+It also works in a `List` or `Form` with the default style, where it looks like any other row button.
+
+With `.borderedProminent`, the label is drawn in white on your tint. On iOS 26, white on the default system blue falls just short of Xcode's contrast audit; a deeper tint passes.
+
+Pass a role for destructive or cancel actions:
+
+```swift
+AnimatedButton("Delete account", role: .destructive) {
+    try await deleteAccount()
+}
+.buttonStyle(.borderedProminent)
+```
+
+| State | What you see | Duration |
+| --- | --- | --- |
+| Pressed | Springs to 96% scale | While touched |
+| Running | Progress indicator in the label's color | Until the action returns or throws |
+| Succeeded | Checkmark, success haptic | 1.2 s, then back to the label |
+| Failed | Xmark and a short shake, error haptic | 1.6 s, then back to the label |
+
+## Errors
+
+A thrown error shows the failure state. The error itself isn't passed on, so if you need it (to show an alert or log it), catch it inside the action and rethrow:
+
+```swift
+@State private var error: Error?
+
+var body: some View {
+    AnimatedButton("Send") {
+        do {
+            try await send()
+        } catch {
+            self.error = error
+            throw error // Still shows the failure state.
+        }
+    }
+}
+```
+
+## Cancellation
+
+If the button disappears while its action runs, for example because the user navigates away, the action's task is cancelled and the button resets without showing a result. Throwing `CancellationError` from the action has the same effect, so cancelled work never looks like a failure. Make long-running work cancellation-aware (`try Task.checkCancellation()`, or APIs such as `URLSession` and `Task.sleep` that already are) so it actually stops.
+
+## VoiceOver announcements
+
+When the action finishes, VoiceOver announces the result: "Done" or "Failed" by default. Replace them with something more specific, or pass `nil` to stay silent:
+
+```swift
+AnimatedButton(
+    "Save",
+    successAnnouncement: "Changes saved",
+    failureAnnouncement: "Couldn't save changes"
+) {
+    try await saveChanges()
+}
+```
+
+Announcements are `LocalizedStringResource` values, so they're looked up in your app's String Catalog like any other text.
+
+## Limitations
+
+- The button doesn't accept an external "is loading" state. It reflects the action it started, which keeps its state impossible to get out of sync.
+- Taps during the success or failure state are ignored until the button returns to its label (at most 1.6 s).
+- Results are shown for a fixed time. There's no API to change the durations.

@@ -1,0 +1,13 @@
+{
+  "id": "example-card",
+  "kind": "component",
+  "name": "Example Card",
+  "summary": "Fixture component used to test the registry and website. Not a real Tessera component.",
+  "category": "layout",
+  "tags": ["fixture"],
+  "status": "draft",
+  "platforms": { "iOS": "17.0" },
+  "source": { "files": ["Sources/Tessera/Components/ExampleCard/ExampleCard.swift"] },
+  "dependencies": { "utilities": ["example-helper"] },
+  "accessibility": { "voiceOver": true, "dynamicType": true, "reduceMotion": true }
+}
