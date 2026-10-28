@@ -29,8 +29,8 @@
     "verify:web": "npm run registry:check && npm run test:scripts && npm run typecheck && npm run lint && npm run build:web"
   },
   "devDependencies": {
-    "@types/node": "^24.19.2",
-    "typescript": "^5",
+    "@types/node": "^26.6.5",
+    "typescript": "^7",
     "zod": "^4.6.7"
   }
 }
