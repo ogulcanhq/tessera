@@ -1,0 +1,27 @@
+import { RepoLink } from "@/components/repo-link";
+
+Tessera welcomes new components, fixes and documentation improvements.
+
+## Propose a component
+
+Open a <RepoLink path="issues/new/choose">**Component proposal** issue</RepoLink> on GitHub before writing code. Describe the problem it solves, sketch its API and note any accessibility considerations. Once the scope is agreed, start building.
+
+## What a component needs
+
+A component pull request includes:
+
+- The SwiftUI source in `Sources/Tessera/Components/<Name>/`, with `#Preview`s.
+- Unit tests for any logic beyond layout.
+- A registry entry, `registry/components/<id>/component.json`, and usage docs in `docs.mdx` next to it.
+- A demo and capture scenarios in the Showcase app.
+- Light and dark previews recorded in the iOS Simulator. If you can’t record them, say so in the pull request and a maintainer will.
+
+## Check your work
+
+From the repository root:
+
+```bash
+make verify
+```
+
+This builds and tests the Swift package and the Showcase app, validates the registry and builds this website. The repository’s <RepoLink path="blob/main/CONTRIBUTING.md">`CONTRIBUTING.md`</RepoLink> and <RepoLink path="blob/main/AGENTS.md">`AGENTS.md`</RepoLink> cover the details, including the GitHub Actions checks every pull request runs.

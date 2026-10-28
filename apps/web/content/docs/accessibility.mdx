@@ -1,0 +1,14 @@
+A Tessera component is not finished until it works for everyone. Every component must:
+
+- Expose a clear VoiceOver label, the right traits and its current value, and announce important state changes.
+- Scale with Dynamic Type through the largest accessibility sizes without clipping or overlapping.
+- Respect **Reduce Motion** by replacing movement, scaling and shaking with simple fades.
+- Keep tap targets at least 44 × 44 points.
+- Work in light and dark mode and in right-to-left languages.
+- Take user-facing text from you, so your app’s localization applies.
+
+## How it’s checked
+
+Each component is reviewed in the Showcase app at different Dynamic Type sizes, in both appearances and with right-to-left layout. Automated accessibility audits run in continuous integration for every Showcase screen.
+
+Each component page lists which of these it supports, with notes on anything specific to that component.

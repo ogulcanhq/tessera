@@ -1,0 +1,5 @@
+{
+  "categories": [
+    { "id": "layout", "title": "Layout", "description": "Containers, cards and arrangement primitives." }
+  ]
+}

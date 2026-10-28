@@ -1,0 +1,11 @@
+{
+  "$schema": "./schema/categories.schema.json",
+  "categories": [
+    { "id": "buttons", "title": "Buttons", "description": "Tappable controls with motion and feedback." },
+    { "id": "inputs", "title": "Inputs", "description": "Fields, pickers, toggles and other ways to enter data." },
+    { "id": "feedback", "title": "Feedback", "description": "Progress, loading, toasts and status indicators." },
+    { "id": "navigation", "title": "Navigation", "description": "Tab bars, menus and ways to move between screens." },
+    { "id": "layout", "title": "Layout", "description": "Containers, cards and arrangement primitives." },
+    { "id": "text", "title": "Text", "description": "Typography effects and text presentation." }
+  ]
+}

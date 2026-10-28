@@ -1,0 +1,36 @@
+{
+  "name": "tessera",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Production-quality SwiftUI components — Swift Package, copy-paste source, Showcase app and website.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ogulcanhq/tessera.git"
+  },
+  "type": "module",
+  "workspaces": [
+    "apps/web"
+  ],
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "registry:check": "node scripts/registry/check.ts",
+    "registry:build": "node scripts/registry/build.ts",
+    "registry:hash": "node scripts/registry/hash.ts",
+    "registry:schema": "node scripts/registry/generate-schema.ts",
+    "standalone:check": "node scripts/standalone/check.ts",
+    "test:scripts": "node --test scripts/registry/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json && npm run typecheck -w web",
+    "lint": "npm run lint -w web",
+    "dev": "npm run dev -w web",
+    "build:web": "npm run build -w web",
+    "verify:web": "npm run registry:check && npm run test:scripts && npm run typecheck && npm run lint && npm run build:web"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "^5",
+    "zod": "^4.6.7"
+  }
+}

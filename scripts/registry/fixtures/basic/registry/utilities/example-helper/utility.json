@@ -1,0 +1,6 @@
+{
+  "id": "example-helper",
+  "kind": "utility",
+  "summary": "Fixture utility.",
+  "source": { "files": ["Sources/Tessera/Core/ExampleHelper/ExampleHelper.swift"] }
+}

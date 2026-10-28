@@ -1,0 +1,131 @@
+{
+  "$schema": "../../schema/component.schema.json",
+  "id": "animated-button",
+  "kind": "component",
+  "name": "Animated Button",
+  "summary": "A button that runs an async action, with press feedback and loading, success and failure states.",
+  "category": "buttons",
+  "tags": [
+    "async",
+    "loading",
+    "haptics",
+    "feedback"
+  ],
+  "status": "beta",
+  "platforms": {
+    "iOS": "17.0"
+  },
+  "source": {
+    "files": [
+      "Sources/Tessera/Components/AnimatedButton/AnimatedButton.swift",
+      "Sources/Tessera/Components/AnimatedButton/AnimatedButtonPhase.swift"
+    ]
+  },
+  "dependencies": {
+    "utilities": [],
+    "frameworks": [
+      "SwiftUI"
+    ]
+  },
+  "previews": [
+    {
+      "id": "success",
+      "title": "Loading to success",
+      "description": "Tap, a 1.5 s action that returns, the checkmark, then back to the label.",
+      "media": [
+        {
+          "kind": "video",
+          "scheme": "light",
+          "file": "previews/success-light.mp4",
+          "poster": "previews/success-light-poster.png",
+          "width": 900,
+          "height": 900
+        },
+        {
+          "kind": "video",
+          "scheme": "dark",
+          "file": "previews/success-dark.mp4",
+          "poster": "previews/success-dark-poster.png",
+          "width": 900,
+          "height": 900
+        }
+      ],
+      "capture": {
+        "method": "automated",
+        "device": "iPhone 17 Pro",
+        "os": "iOS 26.2",
+        "xcode": "26.2",
+        "capturedAt": "2026-10-25",
+        "sourceHash": "277e5e0a0919a7615c0c95137349bb7eb9e9ba15f7f97038e1a012480658613c"
+      }
+    },
+    {
+      "id": "failure",
+      "title": "Loading to failure",
+      "description": "Tap, a 1.5 s action that throws, the xmark with a shake, then back to the label.",
+      "media": [
+        {
+          "kind": "video",
+          "scheme": "light",
+          "file": "previews/failure-light.mp4",
+          "poster": "previews/failure-light-poster.png",
+          "width": 900,
+          "height": 900
+        },
+        {
+          "kind": "video",
+          "scheme": "dark",
+          "file": "previews/failure-dark.mp4",
+          "poster": "previews/failure-dark-poster.png",
+          "width": 900,
+          "height": 900
+        }
+      ],
+      "capture": {
+        "method": "automated",
+        "device": "iPhone 17 Pro",
+        "os": "iOS 26.2",
+        "xcode": "26.2",
+        "capturedAt": "2026-10-25",
+        "sourceHash": "277e5e0a0919a7615c0c95137349bb7eb9e9ba15f7f97038e1a012480658613c"
+      }
+    },
+    {
+      "id": "press",
+      "title": "Press feedback",
+      "description": "Touch and hold, then slide off: the spring press without running the action.",
+      "media": [
+        {
+          "kind": "video",
+          "scheme": "light",
+          "file": "previews/press-light.mp4",
+          "poster": "previews/press-light-poster.png",
+          "width": 900,
+          "height": 900
+        },
+        {
+          "kind": "video",
+          "scheme": "dark",
+          "file": "previews/press-dark.mp4",
+          "poster": "previews/press-dark-poster.png",
+          "width": 900,
+          "height": 900
+        }
+      ],
+      "capture": {
+        "method": "automated",
+        "device": "iPhone 17 Pro",
+        "os": "iOS 26.2",
+        "xcode": "26.2",
+        "capturedAt": "2026-10-25",
+        "sourceHash": "277e5e0a0919a7615c0c95137349bb7eb9e9ba15f7f97038e1a012480658613c"
+      }
+    }
+  ],
+  "accessibility": {
+    "voiceOver": true,
+    "dynamicType": true,
+    "reduceMotion": true,
+    "notes": "VoiceOver reads the button's label in every state, adds the system's \"in progress\" description while the action runs, and announces the result (\"Done\" or \"Failed\" by default; see VoiceOver announcements above). Success and failure play haptics. Reduce Motion turns the press scale into a brief dim, removes the failure shake and cross-fades state changes. The button sizes to its label through the largest Dynamic Type sizes and keeps the same size in every state."
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "kind": {
+      "type": "string",
+      "const": "component"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "tags": {
+      "default": [],
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "beta",
+        "stable",
+        "deprecated"
+      ],
+      "description": "draft: in development, previews optional. beta/stable/deprecated: previews required."
+    },
+    "since": {
+      "description": "First release that contains the component",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "platforms": {
+      "type": "object",
+      "properties": {
+        "iOS": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$"
+        }
+      },
+      "required": [
+        "iOS"
+      ],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^Sources\\/.+\\.swift$"
+          }
+        }
+      },
+      "required": [
+        "files"
+      ],
+      "additionalProperties": false
+    },
+    "dependencies": {
+      "default": {
+        "utilities": [],
+        "frameworks": [
+          "SwiftUI"
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "utilities": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+          }
+        },
+        "frameworks": {
+          "default": [
+            "SwiftUI"
+          ],
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "docs": {
+      "default": "docs.mdx",
+      "type": "string",
+      "const": "docs.mdx"
+    },
+    "previews": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+            "description": "Must match a CaptureScenario id in the Showcase"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string"
+          },
+          "media": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "const": "image"
+                    },
+                    "scheme": {
+                      "type": "string",
+                      "enum": [
+                        "light",
+                        "dark"
+                      ]
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "^previews\\/[a-z0-9-]+\\.(png|webp|jpg)$"
+                    },
+                    "width": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991,
+                      "description": "Pixel width of the media file"
+                    },
+                    "height": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991,
+                      "description": "Pixel height of the media file"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "scheme",
+                    "file",
+                    "width",
+                    "height"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "const": "video"
+                    },
+                    "scheme": {
+                      "type": "string",
+                      "enum": [
+                        "light",
+                        "dark"
+                      ]
+                    },
+                    "file": {
+                      "type": "string",
+                      "pattern": "^previews\\/[a-z0-9-]+\\.mp4$"
+                    },
+                    "poster": {
+                      "type": "string",
+                      "pattern": "^previews\\/[a-z0-9-]+\\.(png|webp|jpg)$",
+                      "description": "Still frame shown before playback and with reduced motion"
+                    },
+                    "width": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991,
+                      "description": "Pixel width of the media file"
+                    },
+                    "height": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991,
+                      "description": "Pixel height of the media file"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "scheme",
+                    "file",
+                    "poster",
+                    "width",
+                    "height"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "capture": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "manual",
+                  "automated"
+                ]
+              },
+              "device": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Simulator device, e.g. iPhone 17 Pro"
+              },
+              "os": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Simulator runtime, e.g. iOS 26.2"
+              },
+              "xcode": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Xcode version used to build the Showcase"
+              },
+              "capturedAt": {
+                "type": "string",
+                "format": "date",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+              },
+              "sourceHash": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$",
+                "description": "Output of `npm run registry:hash -- <id>` at capture time"
+              }
+            },
+            "required": [
+              "method",
+              "device",
+              "os",
+              "xcode",
+              "capturedAt",
+              "sourceHash"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "media",
+          "capture"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "properties": {
+        "voiceOver": {
+          "type": "boolean"
+        },
+        "dynamicType": {
+          "type": "boolean"
+        },
+        "reduceMotion": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "voiceOver",
+        "dynamicType",
+        "reduceMotion"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "name",
+    "summary",
+    "category",
+    "status",
+    "platforms",
+    "source",
+    "accessibility"
+  ],
+  "additionalProperties": false
+}
