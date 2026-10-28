@@ -5,8 +5,10 @@ updates:
     schedule:
       interval: weekly
     groups:
+      # Minor and patch updates together; each major update gets its own pull request.
       web:
         patterns: ["*"]
+        update-types: [minor, patch]
   - package-ecosystem: github-actions
     directory: /
     schedule:

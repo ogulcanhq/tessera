@@ -54,6 +54,18 @@ jobs:
       - name: Standalone copy-paste check
         run: make standalone
 
+      # xcodebuild runs with -quiet, so record what actually ran.
+      - name: Summarize test results
+        if: always()
+        run: |
+          for result in .build/xcode/Logs/Test/*.xcresult; do
+            [ -e "$result" ] || continue
+            xcrun xcresulttool get test-results summary --path "$result" --compact |
+              jq -r --arg name "$(basename "$result" .xcresult)" \
+                '"\($name): \(.result), \(.passedTests) passed, \(.failedTests) failed, \(.skippedTests) skipped"' |
+              tee -a "$GITHUB_STEP_SUMMARY"
+          done
+
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

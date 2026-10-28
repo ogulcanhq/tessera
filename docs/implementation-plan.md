@@ -1,6 +1,6 @@
 # Tessera — Implementation Plan
 
-> Status: **Phase 1E in progress** (2026-10-28): repository and CI prepared for `github.com/ogulcanhq/tessera`. Hosting and the release dry run wait for approval.
+> Status: **Phase 1E complete** (2026-10-28): [github.com/ogulcanhq/tessera](https://github.com/ogulcanhq/tessera) is public and both CI workflows pass on `main`. Hosting and the release dry run wait for approval.
 > Companion documents: [`architecture.md`](./architecture.md), [`technical-decisions.md`](./technical-decisions.md).
 
 ## Overview
@@ -11,7 +11,7 @@
 | **1B — Foundation** | Package, Showcase, registry, website and CI working with zero components | **Done** |
 | **1C — Animated Button** | One component end-to-end through every surface | **Done** |
 | **1D — Validation** | Prove the slice works for users and contributors; connect hosting | Local validation done; hosting and release need approval |
-| **1E — Repository & CI** | Publish the repository; CI running on GitHub | In progress |
+| **1E — Repository & CI** | Publish the repository; CI running on GitHub | **Done** |
 
 ### Approved decisions (start of Phase 1B)
 
@@ -210,7 +210,8 @@ Covers 1D-1 (fresh clone) and 1D-7 (CI on GitHub). Vercel (1D-6) and the release
 | 1E-2 | Repository URL | `repository` in the root `package.json` drives install snippets and GitHub links; snippets say they track `main` until a release |
 | 1E-3 | Workflows | `swift.yml` (macOS 26, Xcode from `.xcode-version`, the Makefile's iPhone 17 Pro / iOS 26.2 destination) and `web.yml` (Ubuntu); PRs to `main`, pushes to `main`, manual runs; read-only token; actions pinned to commit SHAs; xcresult uploaded on failure; registry issues as annotations |
 | 1E-4 | Fresh clone | A local clone of the commit passes `make bootstrap && make verify` |
-| 1E-5 | Publish | Public repository, push to `main`, first CI runs (needs approval) |
+| 1E-5 | Publish | Public repository, pushed to `main`. First runs: Swift passed in 9 min 14 s on Xcode 26.2 (17C52), Website & registry passed |
+| 1E-6 | Follow-up | The CI log now lists test counts from each `.xcresult`. Dependabot groups only minor and patch updates, because its first grouped pull request bundled TypeScript 7 and ESLint 10 and failed typecheck |
 
 ---
 
